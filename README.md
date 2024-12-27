@@ -9,13 +9,15 @@ This repository contains Python scripts for forwarding system logs (Application,
 ├── Linux_version/  
 │   ├── application_log.py  
 │   ├── security_log.py  
-│   ├── system_log.py  
+│   ├── system_log.py
+│   ├── README.md  
 │   └── main.py  
 │  
 ├── Windows_version/  
 │   ├── application_log.py  
 │   ├── security_log.py  
-│   ├── system_log.py  
+│   ├── system_log.py
+│   ├── README.md
 │   └── main.py  
 │  
 └── README.md  
