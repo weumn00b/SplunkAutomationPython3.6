@@ -70,11 +70,6 @@ Ensure the following are installed on the Linux machine:
    cd SplunkAutomation
    ```  
 
-3. **Install Python Dependencies**:  
-   ```bash
-   pip install -r requirements.txt
-   ```  
-
 ---
 
 ### 3. **Configuring Splunk to Receive Logs**  
