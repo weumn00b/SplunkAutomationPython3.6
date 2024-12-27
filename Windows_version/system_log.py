@@ -4,20 +4,34 @@ import socket
 import json
 import csv
 from datetime import datetime
+import time
 
-SPLUNK_SERVER_IP = "localhost"
-SPLUNK_SERVER_PORT = 9000
+SPLUNK_SERVER_IP = "SplunkServerIp"
+SPLUNK_SERVER_PORT = 000  # The TCP Port configured
 LOG_TYPE = "System"
 CSV_FILE = "system_log_last_eventuploaded.csv"
+MAX_RETRIES = 5
+TIMEOUT = 10  # 10 seconds for socket connection timeout
 
 def send_to_splunk(log_entry):
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            sock.connect((SPLUNK_SERVER_IP, SPLUNK_SERVER_PORT))
-            sock.sendall(json.dumps(log_entry).encode('utf-8'))
-        print(f"Sent log to Splunk: {log_entry}")
-    except Exception as e:
-        print(f"Error sending log to Splunk: {e}")
+    retries = 0
+    while retries < MAX_RETRIES:
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.settimeout(TIMEOUT)  # Set a timeout for the connection
+                sock.connect((SPLUNK_SERVER_IP, SPLUNK_SERVER_PORT))
+                sock.sendall(json.dumps(log_entry).encode('utf-8'))
+            print(f"Sent log to Splunk: {log_entry}")
+            return  # Successfully sent, exit the function
+        except socket.timeout:
+            print(f"Timeout error while sending log to Splunk. Retrying... ({retries + 1}/{MAX_RETRIES})")
+        except Exception as e:
+            print(f"Error sending log to Splunk: {e}. Retrying... ({retries + 1}/{MAX_RETRIES})")
+        
+        retries += 1
+        time.sleep(2 ** retries)  # Exponential backoff
+
+    print(f"Failed to send log after {MAX_RETRIES} attempts: {log_entry}")
 
 def get_last_event_time():
     try:

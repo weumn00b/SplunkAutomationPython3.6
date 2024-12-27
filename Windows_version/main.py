@@ -1,32 +1,3 @@
-# import subprocess
-# import time
-# import csv
-# from datetime import datetime, timedelta
-
-# def get_last_event_time(csv_file):
-#     try:
-#         with open(csv_file, mode="r") as csvfile:
-#             reader = csv.reader(csvfile)
-#             return datetime.strptime(next(reader)[0], "%Y-%m-%d %H:%M:%S")
-#     except Exception:
-#         return None
-
-# def check_and_run():
-#     files = [
-#         ("system_log.py", "system_log_last_eventuploaded.csv"),
-#         ("security_log.py", "security_log_last_eventuploaded.csv"),
-#         ("application_log.py", "application_log_last_eventuploaded.csv"),
-#     ]
-
-#     for script, csv_file in files:
-#         last_event_time = get_last_event_time(csv_file)
-#         if not last_event_time or datetime.now() - last_event_time >= timedelta(minutes=1):
-#             subprocess.Popen(["python", script])
-
-# if __name__ == "__main__":
-#     while True:
-#         check_and_run()
-#         time.sleep(30)
 import subprocess
 import time
 import csv
