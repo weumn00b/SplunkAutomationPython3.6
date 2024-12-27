@@ -27,8 +27,8 @@ Ensure the following are installed on the client Windows machine before running 
 ### 2. **Installation**  
 1. Clone the repository using Git:  
    ```bash
-   git clone <repository_url>
-   cd <repository_folder>
+   git clone https://github.com/AbdinasirM/SplunkAutomation
+   cd SplunkAutomation
    ```  
 2. Install Python dependencies:  
    ```bash
@@ -130,7 +130,7 @@ To allow the Splunk server to receive TCP logs from the Windows client:
 ## Requirements File (`requirements.txt`)  
 
 ```plaintext
-pywin32==305
+pywin32
 ```  
 **Explanation**:  
 - `pywin32` – Required for accessing Windows Event Logs through Python.  
