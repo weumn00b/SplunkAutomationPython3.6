@@ -11,7 +11,8 @@ MAX_RETRIES = 5
 
 def get_security_logs():
     try:
-        logs = subprocess.check_output(['journalctl', '-u', 'ssh', '--since', 'yesterday'], text=True)
+        # Get SSH and auth logs with sudo privileges
+        logs = subprocess.check_output(['sudo', 'journalctl', '-u', 'ssh', '--since', 'yesterday'], text=True)
         return logs.splitlines()
     except Exception as e:
         print(f"Error reading security logs: {e}")
