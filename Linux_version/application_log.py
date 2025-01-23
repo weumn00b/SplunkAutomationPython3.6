@@ -11,7 +11,7 @@ MAX_RETRIES = 5
 
 def get_application_logs():
     try:
-        logs = subprocess.check_output(['journalctl', '-p', '4', '--since', 'yesterday'], text=True)
+        logs = subprocess.check_output(['journalctl', '-p', '4', '--since', 'yesterday'], universal_newlines=True)
         return logs.splitlines()
     except Exception as e:
         print(f"Error reading application logs: {e}")
