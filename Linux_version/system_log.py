@@ -11,7 +11,7 @@ MAX_RETRIES = 5
 
 def get_system_logs():
     try:
-        logs = subprocess.check_output(['dmesg'], text=True)
+        logs = subprocess.check_output(['dmesg'], universal_newlines=True)
         return logs.splitlines()
     except Exception as e:
         print(f"Error reading system logs: {e}")
